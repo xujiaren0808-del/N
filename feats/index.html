@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0a09">
+<title>N的私设专长</title>
+<style>
+
+:root{
+  --ink:#0b0a09; --bg:#100e0d; --bg2:#161312;
+  --panel:#191615; --panel2:#221d1a;
+  --line:rgba(188,171,91,.16); --line2:rgba(188,171,91,.34);
+  --brass:#bcab5b; --brass-d:#8f7353;
+  --paper:#ded7c6; --dim:#8b857a;
+  --red:#7a2924; --red-l:#c9503f;
+  --teal:#2c4750; --teal-l:#83aab6;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--ink)}
+body{
+  margin:0;color:var(--paper);font-size:15px;line-height:1.7;
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  background:
+    radial-gradient(1100px 500px at 78% -8%, rgba(188,171,91,.075), transparent 62%),
+    radial-gradient(900px 600px at 8% 22%, rgba(122,41,36,.10), transparent 65%),
+    radial-gradient(700px 500px at 92% 78%, rgba(44,71,80,.12), transparent 62%),
+    linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+  background-attachment:fixed;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:var(--grain);opacity:.16;mix-blend-mode:overlay;
+}
+body>*{position:relative;z-index:1}
+::selection{background:rgba(188,171,91,.3)}
+.orn{display:flex;align-items:center;gap:10px;color:var(--brass-d);font-size:11px;letter-spacing:.3em;margin:18px 0}
+.orn:before,.orn:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent)}
+
+header{position:sticky;top:0;z-index:30;background:rgba(12,10,9,.94);
+ backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:baseline;gap:12px;padding:13px 16px 6px}
+.hd h1{margin:0;font-size:16px;font-weight:600;color:var(--paper);letter-spacing:.22em}
+.hd h1:before{content:"◆";color:var(--brass);margin-right:9px;font-size:10px;vertical-align:2px}
+.hd .cnt{margin-left:auto;font-size:11px;color:var(--dim);letter-spacing:.12em}
+.tabs{display:flex;gap:0;padding:4px 16px 0}
+.tab{padding:7px 16px;font-size:12.5px;letter-spacing:.14em;color:var(--dim);cursor:pointer;
+ border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.tab.on{color:var(--brass);border-bottom-color:var(--brass)}
+.search{padding:8px 16px 10px}
+.search input{width:100%;background:rgba(255,255,255,.025);border:1px solid var(--line);
+ color:var(--paper);border-radius:1px;padding:9px 12px;font-size:14px;font-family:inherit;outline:none;
+ letter-spacing:.06em}
+.search input:focus{border-color:var(--line2);background:rgba(188,171,91,.05)}
+.search input::placeholder{color:#5f5a52;letter-spacing:.1em}
+.filters{display:none;padding-bottom:10px;border-top:1px solid var(--line)}
+.filters.on{display:block}
+.row{display:flex;gap:6px;overflow-x:auto;padding:7px 16px 0;scrollbar-width:none}
+.row::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:4px 12px;border:1px solid var(--line);color:var(--dim);
+ font-size:12px;letter-spacing:.1em;cursor:pointer;background:transparent;white-space:nowrap;
+ transition:all .15s}
+.chip:hover{border-color:var(--line2);color:var(--paper)}
+.chip.on{background:rgba(188,171,91,.14);border-color:var(--brass);color:var(--brass)}
+main{padding:6px 14px 60px;max-width:900px;margin:0 auto}
+.serie{margin-top:30px}
+.serie>.sh{font-size:14px;margin:0 0 2px;color:var(--paper);letter-spacing:.24em;
+ display:flex;align-items:baseline;gap:10px;padding-bottom:9px;border-bottom:1px solid var(--line2)}
+.serie>.sh:before{content:"◆";font-size:9px;color:var(--brass)}
+.serie>.sh span{color:var(--brass);font-size:11px;font-weight:400;letter-spacing:.12em;margin-left:auto}
+.grp{margin-top:20px}
+.grp h3{font-size:12px;margin:0 0 9px;color:var(--brass);letter-spacing:.26em;font-weight:500;
+ display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.grp h3:before{content:"◇";font-size:9px;color:var(--brass-d)}
+.grp h3 span{color:var(--dim);font-size:10.5px;font-weight:400;letter-spacing:.1em;margin-left:auto}
+.chain{display:flex;flex-direction:column;gap:9px}
+.node{background:linear-gradient(180deg,#1c1917,#141211);border:1px solid var(--line);
+ padding:12px 14px;cursor:pointer;transition:border-color .15s,transform .1s,box-shadow .15s;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.028),0 1px 8px rgba(0,0,0,.45)}
+.node:hover{border-color:var(--line2);box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 2px 14px rgba(0,0,0,.6)}
+.node:active{transform:scale(.995)}
+.node .top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.lv{font-size:10.5px;font-weight:700;padding:2px 8px;letter-spacing:.1em;white-space:nowrap}
+.lv4{background:rgba(44,71,80,.5);color:var(--teal-l);border:1px solid rgba(131,170,182,.3)}
+.lv12{background:rgba(122,41,36,.38);color:#d59a92;border:1px solid rgba(201,80,63,.32)}
+.node .nm{font-size:15px;font-weight:600;letter-spacing:.04em}
+.node .wep{margin-left:auto;font-size:11px;color:var(--dim);letter-spacing:.08em;white-space:nowrap}
+.node .attr{margin-top:7px;font-size:12.5px;color:var(--brass);opacity:.9}
+.node .excl{margin-top:5px;font-size:11.5px;color:var(--red-l);letter-spacing:.04em}
+.arrow{display:flex;align-items:center;gap:9px;color:var(--brass-d);font-size:10.5px;
+ letter-spacing:.3em;padding:1px 0 1px 6px}
+.arrow:before{content:"";width:1px;height:14px;background:linear-gradient(180deg,var(--line2),transparent);margin-left:12px}
+.arrow:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.sheet{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;overflow-y:auto}
+.sheet.on{display:block}
+.sheet .bar{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:11px 16px;
+ background:rgba(12,10,9,.95);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.sheet .bar button{background:none;border:none;color:var(--brass);font-size:13px;
+ font-family:inherit;padding:4px 0;cursor:pointer;letter-spacing:.14em}
+.sheet .in{padding:18px 18px 80px;max-width:820px;margin:0 auto}
+.sheet h2{margin:0 0 10px;font-size:22px;color:var(--paper);letter-spacing:.08em;line-height:1.4}
+.sheet h2:after{content:"";display:block;width:46px;height:2px;background:var(--brass);margin-top:10px;opacity:.75}
+.meta{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 4px}
+.pill{border:1px solid var(--line);padding:2px 10px;font-size:11.5px;color:var(--dim);letter-spacing:.1em}
+.kv{font-size:13.5px;color:var(--dim);margin:5px 0;display:flex;gap:10px}
+.kv em{font-style:normal;color:#6f6a61;letter-spacing:.12em;font-size:12px;min-width:4.6em;flex:0 0 auto}
+.kv b{color:var(--paper);font-weight:500}
+.attrbox{margin:18px 0 6px;padding:11px 14px;background:rgba(188,171,91,.075);
+ border:1px solid rgba(188,171,91,.26);border-left:2px solid var(--brass)}
+.attrbox b{display:block;font-size:11px;color:var(--brass);letter-spacing:.24em;margin-bottom:5px}
+.attrbox span{font-size:14px;color:var(--paper)}
+.intro{font-size:13.5px;color:var(--dim);margin:14px 0;padding-left:12px;border-left:1px solid var(--line2);font-style:normal}
+.ab{margin:20px 0}
+.abt{font-size:14.5px;font-weight:600;color:var(--paper);margin-bottom:7px;letter-spacing:.1em;
+ display:flex;align-items:center;gap:9px}
+.abt:before{content:"▸";color:var(--brass);font-size:10px}
+.abl{font-size:14.5px;line-height:1.85;color:#cdc6b8}
+.abl p{margin:0 0 8px;padding-left:14px}
+.origin{margin-top:30px;padding:13px 15px;background:rgba(255,255,255,.02);
+ border:1px solid var(--line);border-top:2px solid var(--brass-d)}
+.origin b{display:block;color:var(--brass);font-size:11px;letter-spacing:.24em;margin-bottom:6px}
+.origin span{font-size:13.5px;color:var(--paper);letter-spacing:.04em}
+.empty{text-align:center;color:var(--dim);padding:70px 20px;letter-spacing:.2em;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd"><h1>N的私设专长</h1><span class="cnt" id="cnt"></span></div>
+  <div class="tabs">
+    <span class="tab on" id="tab-route">路线视图</span>
+    <span class="tab" id="tab-list">列表视图</span>
+  </div>
+  <div class="search" id="searchWrap"><input id="q" type="search" placeholder="检索专长 / 武器 / 能力"></div>
+  <div class="filters" id="filters">
+    <div class="row" id="fSeries"></div>
+    <div class="row" id="fLv"></div>
+    <div class="row" id="fGrp"></div>
+  </div>
+</header>
+<main id="grid"></main>
+<div class="sheet" id="sheet">
+  <div class="bar"><button id="back">‹ 返 回</button></div>
+  <div class="in" id="sheetIn"></div>
+</div>
+<script>
+const ITEMS = [{"name": "战场驭鞭者", "series": "武器大师系列", "lv": 4, "grp": "鞭", "weapons": ["鞭"], "pre": "", "excl": [], "req": "等级4+, 拥有鞭类武器熟练项", "blocks": [["block", "持用鞭类武器时，你获得以下能力", []], ["attr", "属性值提升", ["你的力量或敏捷提升1点（最大20）。"]], ["block", "灵动鞭法", ["· 鞭类武器的伤害骰从d4提升至d6，且触及范围增加5尺（最远15尺）。", "· 当你用鞭类武器命中大型或更小体型的生物时，你可以使用反应迫使目标进行一次敏捷豁免（DC=8+你的力量或敏捷调整值+熟练加值）。豁免失败时，该生物被拉向你5尺并倒地。豁免成功则不受影响。"]], ["block", "卷拽盟友", ["以一个动作，你可以用鞭子卷住15尺内的一名自愿生物。该生物立即移动至一个与你相邻的未占据空间，此移动不引发借机攻击。"]]], "src": "N自制专长", "origin": ""}, {"name": "匕首专家", "series": "武器大师系列", "lv": 4, "grp": "匕首", "weapons": ["匕首"], "pre": "", "excl": [], "req": "等级4+, 拥有匕首熟练项", "blocks": [["intro", "", ["你已将匕首视为身体的一部分，无论是战斗、潜入还是盗窃，它都能成为你最可靠的工具。持用匕首时，你获得下列能力："]], ["attr", "属性值提升", ["你的敏捷或感知增加1点，上限为20。"]], ["block", "投匕倒把", ["你投掷匕首时，其常规射程与最大射程翻倍。"]], ["block", "匕首是我肢体的延展", ["· 匕首被视为盗贼工具的替代品。你可以使用匕首进行开锁或解除陷阱。", "· 当你使用巧手时，你可以额外掷1d4并加入结果。"]], ["block", "先制打击", ["当你对一个尚未在本轮行动过的生物进行攻击时，该攻击额外造成等同于你熟练加值的伤害。"]]], "src": "N自制专长", "origin": ""}, {"name": "Black Sabbath", "series": "武器大师系列", "lv": 12, "grp": "匕首", "weapons": ["匕首"], "pre": "匕首专家", "excl": ["Thriller"], "req": "等级12+, 拥有匕首专家专长, 未习得颤栗专长", "blocks": [["block", "持用匕首时，你获得以下能力", []], ["block", "匕首之心", ["你的匕首伤害骰升级为d6。"]], ["block", "刺杀", ["你使用匕首进行的攻击检定在掷出18-20时造成重击。"]], ["block", "先制打击增强", ["当你对一个尚未在本轮行动过的生物造成伤害时，该目标直到其下一回合开始前无法进行反应。"]], ["block", "安息打击", ["每长休2次，当你发动偷袭时，你可以选择不掷偷袭伤害骰，改为直接造成等于你偷袭伤害骰最大值之和的力场伤害（该伤害不受重击翻倍）。此能力不能与诡诈打击同时使用。"]]], "src": "N自制专长", "origin": "Black Sabbath"}, {"name": "Thriller", "series": "武器大师系列", "lv": 12, "grp": "匕首", "weapons": ["匕首"], "pre": "匕首专家", "excl": ["Black Sabbath"], "req": "等级12+, 拥有匕首专家专长, 未习得黑色安息日专长", "blocks": [["block", "持用匕首时，你获得以下能力", []], ["block", "鬼魅步伐", ["敌方对你发起的所有借机攻击均具有劣势。"]], ["block", "恐怖共鸣", ["当你进行威吓检定时，若你正把玩或持用匕首抵近目标，你可以获得双倍熟练加值（需RP到位）。"]], ["block", "恐怖嗅觉", ["你对“恐惧与秘密”有着极为敏锐的嗅觉。当你进行智力（调查）或感知（察觉/洞悉）检定，以执行符合游荡者身份的行动（如撬锁、搜查、审问等）时，你可以将你的敏捷调整值加入检定结果。若你处于黑暗或微光环境中，该检定具有优势。"]], ["block", "颤栗凝视", ["以一个动作，对30尺内一个你能看见的生物发起一次魅力（欺瞒或威吓）检定，对抗目标的感知（洞悉）。若你胜出，目标在接下来1分钟内对你发起的攻击检定具有劣势。每个目标在24小时内只能被该能力影响一次。每长休期间可使用的次数等于你的熟练加值。"]], ["block", "恐惧如影随行", ["处于“颤栗凝视”影响下的生物10尺范围内，你及你的盟友对该生物进行的攻击检定具有优势。"]]], "src": "N自制专长", "origin": "MJ：Thriller"}, {"name": "余震掌控", "series": "武器大师系列", "lv": 4, "grp": "锤类", "weapons": ["战锤", "巨锤", "轻锤", "硬头锤", "晨星", "连枷"], "pre": "", "excl": [], "req": "等级4+, 任意锤类武器（含连枷）熟练项", "blocks": [["intro", "", ["你初步掌握了将自身的力量通过锤柄传递至大地的秘法，每一次打击都能引发共鸣，并在探索时成为最好的探测工具。持用锤类或连枷武器时，你获得以下能力："]], ["attr", "属性值提升", ["你的力量或体质增加1点，上限20。"]], ["block", "破甲重击", ["当你用锤类武器命中身着金属护甲或具有天生护甲（如厚皮、甲壳）的生物时，你忽略目标2点AC。若目标是构装体，你的攻击检定具有优势。"]], ["block", "余震", ["当你使用锤类武器攻击命中一个生物后，你将余震传递至该生物身上，迫使其进行一次力量豁免（DC=8+你的力量调整值+熟练加值）。豁免失败时，目标在其下一回合结束前速度减半，且直到其下一回合开始前，无法使用反应。豁免成功不受影响。"]], ["block", "大地探测", ["当你通过敲击地面，感受震动来分析环境（如寻找密室、机关、空心结构，或判断建筑强度）时，你可以进行一次智力（调查）或感知（察觉）检定，将你的力量调整值加入检定结果。"]]], "src": "N自制专长", "origin": ""}, {"name": "Hells bells", "series": "武器大师系列", "lv": 12, "grp": "锤类", "weapons": ["战锤", "巨锤", "轻锤", "硬头锤", "晨星", "连枷"], "pre": "余震掌控", "excl": [], "req": "等级12+, 拥有余震掌控专长", "blocks": [["intro", "", ["你的锤声像是来自地狱的召唤，粉碎护甲、震裂灵魂。当你持用连枷、锤类武器时，获得以下能力："]], ["block", "地狱共振", ["每短休一次，以一个动作，你猛击地面制造一道以自身为中心、半径20尺的震荡波。范围内每个生物必须进行一次力量豁免（DC=8+力量调整值+熟练加值）。豁免失败者受到5d6点雷鸣伤害并陷入倒地；豁免成功者伤害减半且不被击倒。范围内所有松散小物体（如玻璃、瓷器）立即碎裂。"]], ["block", "毁灭回音", ["当你使用“地狱共振”时，范围内每有一个受到伤害的生物（除你以外），都会在其周围10尺内产生“回音震波”，对所有其他生物造成额外1d6点雷鸣伤害，同一生物每回合至多因该效果受到3次伤害。"]], ["block", "地狱钟声 Hells bells", ["每短休一次，当你用锤类武器将一个生物的生命值降至0时，以一个反应，你挥舞武器敲响一声震耳欲聋的钟鸣。60尺内能听到该声音的敌对生物必须进行一次体质豁免（DC=8+力量调整值+熟练加值），豁免失败者陷入震慑状态，直至其下一回合开始；豁免成功不受影响。"]]], "src": "N自制专长", "origin": "AC/DC：Hells bells"}, {"name": "Iron Maiden", "series": "武器大师系列", "lv": 12, "grp": "长柄", "weapons": ["长柄刀", "戟", "长柄矛", "骑枪"], "pre": "长柄武器大师（官方）", "excl": [], "req": "等级12+, 拥有长柄武器大师专长", "blocks": [["intro", "", ["当你持用长柄刀、戟、长矛、骑枪或其他同时具有重型、触及词条的武器时，获得以下能力："]], ["block", "猛将", ["你的长柄武器伤害骰提升一级（1d10→1d12，1d12→2d6）。"]], ["block", "绝对领域", ["你的AC+1。当生物进入你的触及范围时，你发起的反应打击获得优势。若命中，目标直到其下一回合开始前速度降为0。"]], ["block", "", ["愿你的名被尊为圣 Hallowed Be Thy Name：你免疫恐慌状态。此外，每长休一次，当你浴血时，你可以用一个附赠动作进入“武圣”状态，持续3分钟。武圣状态下：", "· 你的武器攻击检定获得优势。", "· 你失去对所有伤害类型的抗性和免疫（若有）。", "· 你免疫任何将你击倒或强制位移的效果。", "· 每当你受到来自敌对生物的近战武器攻击伤害时，你可以消耗1d6点生命值，对该生物发动一次武器攻击。每轮至多触发两次。", "· 你的生命值无法被降至1以下。任何将你的生命值降至0或更低的伤害，改为将你的生命值降至1。", "· 武圣状态结束后，你立即获得1级力竭，你的生命值变为0后倒地。此外，你在下一次进行死亡豁免时自动获得一次成功（此效果持续至完成一次长休）。"]]], "src": "N自制专长", "origin": "Iron Maiden：Hallowed Be Thy Name"}, {"name": "巨镰使", "series": "武器大师系列", "lv": 4, "grp": "巨镰", "weapons": ["巨镰（私设）"], "pre": "", "excl": [], "req": "等级4+, 熟练于一种军用武器", "blocks": [["intro", "", ["你经过长期的学习与训练，获得了巨镰熟练项。巨镰是一种特殊的军用近战武器（巨镰：1d10挥砍，重型、触及、双手，精通：横扫，重量10磅，价格80GP）你持用巨镰时，获得以下能力："]], ["attr", "属性值提升", ["你的力量或体质增加1点，上限20。"]], ["block", "巨镰格挡", ["当你被近战攻击命中时，你可以用反应挥舞巨镰格挡，将此次伤害减少1d10+你的力量调整值。每长休期间可使用次数等于你的熟练加值。"]], ["block", "回旋斩", ["每短休一次，以一个动作挥舞巨镰进行旋风斩。半径10尺内的每个生物必须进行一次敏捷豁免（DC=8+力量调整值+熟练加值）。豁免失败者受到2d8点挥砍伤害，豁免成功则伤害减半。", "回旋斩强化：到达特定等级后，回旋斩的伤害将增加2d8：8级（4d8）、12级（6d8）、16级（8d8）。"]]], "src": "N自制专长", "origin": ""}, {"name": "活结Slipknot", "series": "武器大师系列", "lv": 12, "grp": "巨镰", "weapons": ["巨镰（私设）"], "pre": "巨镰使", "excl": [], "req": "等级12+, 拥有巨镰使专长", "blocks": [["block", "你持用巨镰时，获得以下能力", []], ["block", "连锁绞杀", ["当你用巨镰将一个生物的生命值降至0时，你可以立即移动至多20尺，并对触及范围内另一个你能看见的敌对生物发动一次巨镰攻击（不消耗动作）。若命中，额外造成2d10点挥砍伤害。"]], ["block", "希望破灭 All Hope Is Gone", ["每短休一次，以一个动作对触及范围内一个你能看见的敌对生物发动破灭斩：", "· 破灭斩：已臻化境的一斩。你的攻击检定具有优势，且额外造成2d10点挥砍伤害。若达成重击，将所有伤害骰掷三次，而非原本的两次。"]], ["block", "收割者之印", ["当你使用“希望破灭”将一个生物的生命值降至0时，你立即恢复2d10+角色等级点生命值，且你的下一次攻击检定具有优势，重击范围扩大2点，持续1分钟。"]]], "src": "N自制专长", "origin": "Slipknot：All Hope Is Gone"}, {"name": "战斗饥渴", "series": "武器大师系列", "lv": 4, "grp": "斧类", "weapons": ["战斧", "巨斧", "手斧"], "pre": "", "excl": [], "req": "等级4+, 拥有任意斧类武器熟练项", "blocks": [["intro", "", ["疼痛是你的燃料，伤痕是你的勋章。持用斧类武器时，你获得以下能力："]], ["attr", "属性值提升", ["你的力量或体质增加1点，上限为20。"]], ["block", "战斗饥渴", ["当你的当前生命值等于或低于生命值上限的一半时，你的斧类武器攻击伤害获得+2加值。"]], ["block", "血斧", ["当你进行威吓检定时，可以将你的力量调整值加入检定结果。"]], ["block", "反击螺旋", ["当你被敌对生物的攻击命中时，你可以用反应以自身为中心挥舞斧刃，对5尺内所有敌对生物造成1d8+力量调整值的挥砍伤害。若你的当前生命值低于一半，伤害骰提升至2d8。该能力每次长休期间可使用的次数等于你的熟练加值。"]]], "src": "N自制专长", "origin": ""}, {"name": "墓志铭Epitaph", "series": "武器大师系列", "lv": 12, "grp": "斧类", "weapons": ["战斧", "巨斧", "手斧"], "pre": "战斗饥渴", "excl": [], "req": "等级12+, 拥有战斗饥渴专长", "blocks": [["intro", "", ["红月之下，你刻下无数无名墓碑，给你的敌人，也给终将无敌于天下的你。持用斧类武器时，你获得以下能力："]], ["block", "战斗饥渴强化", ["当你的生命值等于或低于生命值上限的一半时，你的斧类武器攻击额外造成1d8点挥砍伤害（替代战斗饥渴的+2加值）。"]], ["block", "淘汰之刃", ["每长休一次，以一个动作，对你能看见的一个敌对生物发动一次无法获得优势或劣势的近战武器攻击。若命中：", "· 若该生物受到此次伤害后的剩余生命值等于或小于你的职业总等级×3，则其生命值直接降至0。", "· 若其剩余生命值高于该阈值，则此次攻击额外造成2d10+力量调整值点挥砍伤害。", "· 若该攻击未命中，则本次使用次数不被消耗。"]], ["block", "墓志铭epitaph", ["每当你用“淘汰之刃”斩杀一个挑战等级大于或等于你的职业总等级的生物时，你掷一枚该生物的生命骰，永久增加掷骰结果点最大生命值。若该生物CR高于你等级2级或更多，则掷两枚生命值骰。通过此能力获得的最大生命值上限不能超过角色职业总等级×4。"]]], "src": "N自制专长", "origin": "King Crimson：Epitaph"}, {"name": "剑术大师", "series": "武器大师系列", "lv": 4, "grp": "剑类", "weapons": ["长剑", "短剑", "刺剑", "弯刀"], "pre": "", "excl": [], "req": "等级4+, 拥有长剑、短剑、刺剑或弯刀的熟练项", "blocks": [["intro", "", ["你将剑视为身体的延伸，当持用长剑、短剑、刺剑或弯刀时，你获得以下能力："]], ["attr", "属性值提升", ["你的力量或敏捷增加1点，上限20。"]], ["block", "听风辨位", ["当你被一次实体投射物或投掷武器的远程攻击命中时（不含法术攻击），你可以用反应挥剑将其斩落。进行一次攻击检定，若结果高于攻击者的攻击检定，则该次攻击无效。此特性每次长休期间可使用次数等于你的熟练加值。此外：", "· 持用长剑或弯刀时，此次攻击检定具有优势。", "· 持用短剑或刺剑时，成功斩落后，你对攻击者的下一次攻击检定具有优势。"]], ["block", "剑式", ["你掌握三种剑式，投掷先攻时，你可以选择以下一种剑式启动（无需动作）。战斗中可用附赠动作切换。同一时间你只能保持一种剑式。", "· 斩铁式：每回合一次，当你的近战武器攻击检定命中一个生物时，额外造成等于你熟练加值的伤害。", "· 流水式：你的速度额外增加5尺。当你用剑类武器攻击一个生物后，该生物在本回合内无法对你发动借机攻击。", "· 残心式：当一个你能看见的生物对你发动攻击但未命中时，你获得残心状态。处于残心状态期间，你下一次使用剑类武器进行的攻击检定具有优势。残心持续至你进行攻击检定或你的下一回合结束。同一时间你只能拥有一个残心状态。"]]], "src": "N自制专长", "origin": ""}, {"name": "Princes of the Universe", "series": "武器大师系列", "lv": 12, "grp": "剑类", "weapons": ["刺剑"], "pre": "剑术大师", "excl": [], "req": "等级12+, 拥有剑术大师专长", "blocks": [["intro", "", ["你的刺剑技法优雅诡谲，每一击都如同艺术品。持用刺剑时，你获得以下能力："]], ["block", "致命优雅", ["刺剑的伤害骰升级为d10。未持用盾牌时，你的AC获得+1加值。"]], ["block", "白手套", ["战斗开始时，或以一个附赠动作，你可以向30尺内一个能看见你的生物掷出白手套，发起决斗邀请。目标必须进行一次感知豁免（DC=8+熟练加值+你的魅力调整值）。豁免成功不受影响。豁免失败时，你与目标受到决斗礼仪约束，持续1分钟：", "· 目标只能以你为目标进行攻击。", "· 目标若尝试远离你，速度减半，且无法移动至超过你30尺的位置。", "· 你对目标的刺剑攻击检定具有优势。", "· 你无法移动至目标30尺以外的位置，且你对其他生物的攻击自动失手；你不能对除目标外的生物施放法术或使用有害能力。", "· 该能力每次长休期间可使用次数等于你的熟练加值。"]], ["block", "王子战法", ["每短休一次，当你用刺剑命中处于\"白手套\"约束下的目标时，你可以放弃该次伤害，改为对同一目标发动王子战法，你立即对同一目标进行3次额外的刺剑攻击检定（不消耗动作）。每次攻击额外造成1d8点力场伤害。若某次攻击命中且你处于\"残心式\"状态下，该次攻击的伤害骰取最大值。", "· 若目标在王子战法期间生命值降至0，你可以立即将剩余攻击次数转移给30尺内另一个你能看见的敌对生物，但转移后的攻击具有劣势。", "· 发动王子战法时，你可以大声喊出傲慢的台词（如'尝尝这招！'、‘对付你，我一个就足够了！’），20尺内能听到该声音的智力高于等于6的敌对生物必须进行感知豁免，豁免失败则对你产生敌意优先以你为攻击目标。"]], ["block", "贵族仪态", ["当你身着非盔甲的精致服装时，你在魅力检定中具有优势。"]]], "src": "N自制专长", "origin": "Queen：Princes of the Universe"}, {"name": "War Pigs", "series": "武器大师系列", "lv": 12, "grp": "剑类", "weapons": ["弯刀"], "pre": "剑术大师", "excl": [], "req": "等级12+, 拥有剑术大师专长", "blocks": [["intro", "", ["你从鲜血中汲取狂怒，暴风骤雨般的连击让敌人无从招架。持用弯刀时，你获得以下能力："]], ["block", "战争狂热", ["你的先攻检定具有优势。当你在同一回合内第三次使用弯刀命中生物时，你进入战争狂热状态，持续至你的下一回合结束。持续期间：", "· 你的弯刀攻击额外造成1d6点挥砍伤害。", "· 你不会引发借机攻击。", "· 若你处于剑式-流水式状态，战争狂热触发时你可以立即移动至多15尺。"]], ["block", "战争之躯", ["每长休一次，当你的生命值降至0但未立即死亡时，你可以立刻恢复2d8+角色职业总等级点生命值，并移动至多15尺，同时对触及范围内的一个生物发动一次具有优势的攻击。若此攻击命中，你获得等同于该次伤害值的临时生命值。"]], ["block", "战争猪猡War Pigs", ["每短休一次，以一个附赠动作，你进入战争猪猡状态，持续1分钟或直至你陷入失能状态，持续期间：", "· 每回合第一次弯刀攻击命中时，你可以立即进行一次额外的弯刀攻击（不消耗动作）。", "· 若你在同一回合内用弯刀命中同一生物三次，该目标额外受到3d6点挥砍伤害，且必须进行体质豁免（DC=8+熟练加值+你的敏捷调整值）。豁免失败陷入流血状态（每回合开始时受到1d6点挥砍伤害，速度减少10尺）。流血状态可由目标或其5尺内生物以一个动作进行感知（医疗）检定终止。", "· 当你将一个生物生命值降至0时，你可以立即移动至多等同于你当前剩余速度的距离，并对一个你能看见的敌对生物发动一次弯刀攻击。该特性每回合最多触发一次。", "· 若你处于剑式-流水式状态，你的速度额外增加10尺。"]]], "src": "N自制专长", "origin": "Black Sabbath：War Pigs"}, {"name": "剑圣", "series": "武器大师系列", "lv": 12, "grp": "剑类", "weapons": ["长剑", "短剑"], "pre": "剑术大师", "excl": [], "req": "等级12+, 拥有剑术大师专长", "blocks": [["intro", "", ["你的剑术已臻化境。不同流派、不同架势、不同技巧在你手中融会贯通，最终归于一体。当你持用长剑或短剑时，根据剑种获得不同能力："]], ["block", "剑心通明", ["· 剑气纵横：你的长剑攻击在掷出19-20时造成重击。重击时，你可以对35尺内你能看见的另一个生物释放一道剑气——进行一次远程攻击检定（使用你的力量或敏捷调整值+熟练加值），若命中，目标受到等于你角色等级点力场伤害。", "· 残影连刺：你的短剑攻击检定获得+1加值。当你用短剑命中一个生物时，你可以用附赠动作对该生物再发动一次短剑攻击。若你在一回合内用短剑命中同一生物三次，该生物必须进行一次体质豁免（DC=8+熟练加值+你的敏捷调整值），豁免失败者在其下一回合结束前，无法使用反应且所有攻击检定具有劣势。豁免成功不受影响。"]], ["block", "剑式真解", ["你的三种剑式获得强化：", "· 斩铁式·极意：失去原斩铁式每回合一次的增伤限制。此外，你的攻击忽略目标2点AC。", "· 流水式·无痕：获得的额外速度从5尺增加到20尺。此外，所有敌对生物对你进行的借机攻击都具有劣势。", "· 残心式·明镜止水：当你处于残心式时，若一个生物对你发动的攻击未命中，你可以用反应对该生物进行一次攻击。若攻击命中，你立即恢复等于你敏捷调整值的生命值，且本次攻击不消耗残心状态"]]], "src": "N自制专长", "origin": ""}, {"name": "棍术大师", "series": "武器大师系列", "lv": 4, "grp": "棍类", "weapons": ["短棒", "巨棒", "长棍"], "pre": "", "excl": [], "req": "等级4+, 拥有短棒、巨棒或长棍的熟练项", "blocks": [["block", "持用短棒、巨棒或长棍时，你获得以下能力", []], ["attr", "属性值提升", ["你的力量或敏捷增加1点，上限20。"]], ["block", "灵活步法", ["使用短棒、巨棒或长棍攻击命中后，可移动至多 5 尺，这段移动不会触发借机攻击，但会消耗自己的剩余移动力。"]], ["block", "精准招架", ["当你被一名你可见的生物的近战攻击命中时，可以使用反应使自己的AC获得+2加值。如果本次攻击因此未命中，可以立即使用所持棍棒对攻击者进行一次近战攻击。"]]], "src": "N自制专长", "origin": ""}, {"name": "ZITTI E BUONI", "series": "武器大师系列", "lv": 12, "grp": "棍类", "weapons": ["短棒", "巨棒", "长棍"], "pre": "棍术大师", "excl": [], "req": "等级12+, 拥有棍术大师专长", "blocks": [["block", "持用短棒、巨棒或长棍时，你获得以下能力", []], ["block", "无拘之舞", ["你的速度增加 10 尺。灵活步法可移动的距离增加至 10 尺，并且灵活步法提供的额外移动不消耗自身移动力。"]], ["block", "扫棍", ["当你攻击命中一个体型为大型或更小的生物时，你可以迫使目标进行一次力量豁免，豁免DC=8+PB+力/敏调（根据你4级专长中选择的属性）。豁免失败：倒地。每回合你只能通过此能力影响一个生物。"]], ["block", "摔棍", ["当你执行攻击动作时，你可以将你的一次攻击替换为摔棍，以刚猛的棍击摔打目标，攻击命中造成 3d8 点钝击伤害，如果攻击的目标处于倒地状态，此次攻击造成的钝击伤害改为 8d8点。你能使用此特性的次数等于你的熟练加值，当你完成长休时，重获所有已消耗的使用次数。", "*请注意，此处3d8与8d8是最终伤害，并非额外伤害。"]]], "src": "N自制专长", "origin": "Måneskin：ZITTI E BUONI"}, {"name": "人肉投矛器", "series": "武器大师系列", "lv": 4, "grp": "矛类", "weapons": ["标枪", "矛", "三叉戟"], "pre": "", "excl": [], "req": "等级4+, 拥有标枪、矛或三叉戟的熟练项", "blocks": [["block", "持用标枪、矛或三叉戟时，你获得以下能力", []], ["attr", "属性值提升", ["你的力量或体质增加1点，上限20。"]], ["block", "强力投掷", ["当你进行投掷攻击时，其常规射程和最大射程各增加20尺。你的投掷攻击检定获得+1加值。你的投掷攻击命中时，你可以额外造成等于你熟练加值的伤害。"]]], "src": "N自制专长", "origin": ""}, {"name": "Ride The Lightning", "series": "武器大师系列", "lv": 12, "grp": "矛类", "weapons": ["标枪", "矛", "三叉戟"], "pre": "人肉投矛器", "excl": [], "req": "等级12+, 拥有人肉投矛器专长", "blocks": [["block", "持用标枪、矛或三叉戟时，你获得以下能力", []], ["block", "巨力投掷", ["当你进行投掷攻击时，其常规射程和最大射程从增加20尺改为翻倍。"]], ["block", "集中投掷", ["当你在自己的回合内执行攻击动作时，你可以放弃该动作所能进行的所有攻击，将其凝聚为一次投掷攻击。该次投掷攻击检定命中时，除正常伤害外，每放弃一次攻击，额外造成3d8点伤害（如放弃双打6d8。战士11级3打，放弃之后9d8）。你能使用此特性的次数等于你的熟练加值，当你完成长休时，重获所有已消耗的使用次数。"]], ["block", "贯穿", ["当你使用集中投掷命中一个生物时，投掷武器会继续沿原方向飞行，在目标后方形成一条长 15 尺、宽 1 尺的直线路径。路径上的其他生物必须进行一次敏捷豁免，DC=8+PB+力调。豁免失败：受到集中投掷的完整伤害。豁免成功：完全避开此次伤害；对路径上每个生物分别结算伤害抗性、伤害免疫及其他适用的伤害减免效果。"]]], "src": "N自制专长", "origin": "Metallica：Ride The Lightning"}, {"name": "I Talk to the Wind", "series": "武器大师系列", "lv": 12, "grp": "弓弩", "weapons": ["短弓", "长弓", "轻弩", "重弩", "手弩"], "pre": "神射手 / 强弩专家（官方）", "excl": [], "req": "等级12+, 拥有神射手或强弩专家专长", "blocks": [["block", "持用弓或弩时，你获得以下能力", []], ["block", "顺风", ["你的先攻检定具有优势，且弓或弩武器的伤害骰提升一级。"]], ["block", "风之共鸣", ["在有风存在的环境中，你针对环境与生物位置的感知（察觉）与（求生）检定具有优势。此外，你可以感知到30尺内处于隐形或全遮蔽生物的大致方向位置。"]], ["block", "风之低语", ["每短休一次，你可以将一段不超过25个单词的口信交给风，让它传递给2公里内一个你熟悉的生物。该生物会听到你的声音在风中低语。"]], ["block", "风行", ["每短休一次，以一个附赠动作，你被风环绕，进入\"风行\"状态，持续至你下一回合结束、陷入失能或主动结束（无需动作）。风行状态下：", "· 你的速度增加20尺且无视所有困难地形；", "· 对你发动的所有远程武器攻击具有劣势；", "· 当你在自身回合内移动时，你不会引发借机攻击；", "· 每回合一次，当你使用远程武器攻击后，你可以立即不消耗速度地移动至多10尺。"]], ["block", "落叶纷飞", ["每短休一次，以一个动作。你选择40尺内一个你能看见的地点，以该点为中心、半径10尺的圆形区域，被从天而降的箭雨覆盖。区域内每个生物必须进行一次敏捷豁免（DC=8+熟练加值+你的敏捷调整值）。豁免失败者受到6d8点穿刺伤害，豁免成功伤害减半。"]]], "src": "N自制专长", "origin": "King Crimson：I Talk to the Wind"}, {"name": "Painkiller", "series": "武器大师系列", "lv": 12, "grp": "巨剑", "weapons": ["巨剑"], "pre": "巨武器大师（官方）", "excl": [], "req": "等级12+, 拥有巨武器大师专长", "blocks": [["block", "持用巨剑时，你获得以下能力", []], ["block", "金属巨兽", ["你擅长用野性驾驭巨剑，巨剑时你的触及范围增加5尺，且该武器的伤害骰升级为2d8，但你的AC上限变更为16（无法以任何方式提高或临时赋予）。"]], ["block", "杀戮机器", ["你免疫恐慌状态，当你攻击目标的当前生命值低于或等于你的职业总等级*3，你的攻击检定具有优势。"]], ["block", "鲜血引擎", ["每短休一次，当你将一个生物的生命值降至0时，你可以立即沿直线移动至多15尺（不消耗移动力），若移动路径经过任何其他生物，你可以对其中一个发动一次巨剑攻击（不消耗动作）。该攻击额外造成1d10点力场伤害。"]], ["block", "永不停歇", ["每回合一次，当你重击时，你可以使用反应对同一目标发动一次额外的巨剑攻击。 该特性每长休期间可使用次数等于你的熟练加值。"]]], "src": "N自制专长", "origin": "Judas Priest：Painkiller"}];
+const $ = s => document.querySelector(s);
+const st = {view:"route", q:"", series:new Set(), lv:new Set(), grp:new Set()};
+const GROUPS = ["鞭","匕首","锤类","长柄","巨镰","斧类","剑类","棍类","矛类","弓弩","巨剑"];
+
+function e(s){return String(s==null?"":s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));}
+
+function lvBadge(it){
+  const cls = it.lv===4 ? "lv4" : "lv12";
+  return '<span class="lv '+cls+'">'+(it.lv?it.lv+' 级':'—')+'</span>';
+}
+
+function match(it){
+  if(st.series.size && !st.series.has(it.series)) return false;
+  if(st.lv.size && !st.lv.has(String(it.lv))) return false;
+  if(st.grp.size && !st.grp.has(it.grp)) return false;
+  if(st.q){
+    const q = st.q.toLowerCase();
+    const hay = (it.name+" "+it.grp+" "+it.weapons.join(" ")+" "+it.req+" "+
+                 it.blocks.map(b=>b[1]+" "+b[2].join(" ")).join(" ")).toLowerCase();
+    if(hay.indexOf(q)<0) return false;
+  }
+  return true;
+}
+
+function node(it){
+  const attr = (it.blocks.find(b=>b[0]==="attr")||[])[2];
+  return '<div class="node" data-n="'+e(it.name)+'">'
+    + '<div class="top">'+lvBadge(it)+'<span class="nm">'+e(it.name)+'</span>'
+    + '<span class="wep">'+e(it.weapons.join(" · ")||"—")+'</span></div>'
+    + (attr?'<div class="attr">'+e(attr.join(" "))+'</div>':'')
+    + (it.excl.length?'<div class="excl">⊘ 与 '+e(it.excl.join("、"))+' 二选一</div>':'')
+    + '</div>';
+}
+
+function renderRoute(list){
+  const byS = {};
+  list.forEach(it=>{ (byS[it.series]=byS[it.series]||[]).push(it); });
+  if(!Object.keys(byS).length) return '<div class="empty">无符合项</div>';
+  return Object.keys(byS).map(s=>{
+    const arr = byS[s];
+    const byG = {};
+    arr.forEach(it=>{ (byG[it.grp]=byG[it.grp]||[]).push(it); });
+    const gkeys = Object.keys(byG).sort((a,b)=>{
+      const ia=GROUPS.indexOf(a), ib=GROUPS.indexOf(b);
+      return (ia<0?99:ia)-(ib<0?99:ib);
+    });
+    let h = '<section class="serie"><div class="sh">'+e(s)+'<span>'+arr.length+' 条</span></div>';
+    gkeys.forEach(g=>{
+      const garr = byG[g];
+      const base = garr.filter(x=>x.lv===4);
+      const adv = garr.filter(x=>x.lv!==4);
+      h += '<div class="grp"><h3>'+e(g)+'<span>'+garr.length+' 条</span></h3><div class="chain">';
+      base.forEach(it=>{ h += node(it); });
+      if(adv.length){
+        h += '<div class="arrow">进 阶</div>';
+        adv.forEach(it=>{ h += node(it); });
+      }
+      h += '</div></div>';
+    });
+    return h + '</section>';
+  }).join("");
+}
+
+function renderList(list){
+  if(!list.length) return '<div class="empty">无符合项</div>';
+  return '<div class="chain">'+list.map(it=>node(it)).join("")+'</div>';
+}
+
+function render(){
+  const list = ITEMS.filter(match);
+  $("#cnt").textContent = list.length + " / " + ITEMS.length;
+  $("#grid").innerHTML = st.view==="route" ? renderRoute(list) : renderList(list);
+  $("#grid").querySelectorAll(".node").forEach(n=>{
+    n.onclick = ()=> openItem(ITEMS.find(x=>x.name===n.dataset.n));
+  });
+}
+
+function chipRow(el, values, set, label){
+  el.innerHTML = values.map(v=>'<span class="chip" data-v="'+e(v)+'">'+e(label?label(v):v)+'</span>').join("");
+  el.querySelectorAll(".chip").forEach(c=>{
+    c.onclick = ()=>{
+      const v = c.dataset.v;
+      if(set.has(v)){ set.delete(v); c.classList.remove("on"); }
+      else { set.add(v); c.classList.add("on"); }
+      render();
+    };
+  });
+}
+
+function openItem(it){
+  if(!it) return;
+  let h = '<h2>'+e(it.name)+'</h2>';
+  h += '<div class="meta">'+lvBadge(it)
+     + '<span class="pill">'+e(it.series)+'</span>'
+     + '<span class="pill">'+e(it.grp)+'</span></div>';
+  h += '<div class="kv"><em>先决条件</em><b>'+e(it.req||"无")+'</b></div>';
+  if(it.pre) h += '<div class="kv"><em>前置专长</em><b>'+e(it.pre)+'</b></div>';
+  h += '<div class="kv"><em>适用武器</em><b>'+e(it.weapons.join("、")||"—")+'</b></div>';
+  if(it.excl.length) h += '<div class="kv"><em>互斥</em><b style="color:var(--red-l)">与 '+e(it.excl.join("、"))+' 二选一</b></div>';
+  it.blocks.forEach(b=>{
+    if(b[0]==="attr"){
+      h += '<div class="attrbox"><b>'+e(b[1])+'</b><span>'+e(b[2].join(" "))+'</span></div>';
+    } else if(b[0]==="intro"){
+      h += '<p class="intro">'+e(b[2].join(" "))+'</p>';
+    } else {
+      h += '<div class="ab">'+(b[1]?'<div class="abt">'+e(b[1])+'</div>':'')
+         + '<div class="abl">'+b[2].map(x=>'<p>'+e(x)+'</p>').join("")+'</div></div>';
+    }
+  });
+  if(it.origin) h += '<div class="origin"><b>名称来源</b><span>'+e(it.origin)+'</span></div>';
+  $("#sheetIn").innerHTML = h;
+  $("#sheet").classList.add("on");
+  $("#sheet").scrollTop = 0;
+}
+
+$("#back").onclick = ()=> $("#sheet").classList.remove("on");
+$("#q").oninput = e => { st.q = e.target.value.trim(); render(); };
+$("#tab-route").onclick = ()=>{
+  st.view="route";
+  $("#tab-route").classList.add("on"); $("#tab-list").classList.remove("on");
+  $("#filters").classList.remove("on"); render();
+};
+$("#tab-list").onclick = ()=>{
+  st.view="list";
+  $("#tab-list").classList.add("on"); $("#tab-route").classList.remove("on");
+  $("#filters").classList.add("on"); render();
+};
+
+const SERIES_ALL = [...new Set(ITEMS.map(i=>i.series))];
+if(SERIES_ALL.length > 1) chipRow($("#fSeries"), SERIES_ALL, st.series);
+else $("#fSeries").style.display = "none";
+chipRow($("#fLv"), ["4","12"], st.lv, v=>v+" 级");
+chipRow($("#fGrp"), GROUPS.filter(g=>ITEMS.some(i=>i.grp===g)), st.grp);
+
+render();
+</script>
+</body>
+</html>
